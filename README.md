@@ -16,6 +16,14 @@
 - Inside body component, create a outlet for children to render
 - Create a Footer
 
+## create Login Page
+
+- add input fields
+- install cors in backend => add middleware to add with corsOptions => origin and credentials true
+- make fetch post call in handleLogin for login button
+- in the api call, pass credentials:"include"
+- Then cookies and token will be set in the browser
+
 Design:
 
 Body
