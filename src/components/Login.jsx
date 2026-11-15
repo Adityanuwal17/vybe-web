@@ -1,8 +1,14 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
+import { useNavigate } from "react-router";
+import { BASE_URL } from "../utils/constants";
 
 const Login = () => {
   const [emailId, setEmailId] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     const loginPayload = {
@@ -10,7 +16,7 @@ const Login = () => {
       password: password,
     };
     try {
-      const response = await fetch("http://localhost:3000/login", {
+      const response = await fetch(BASE_URL + "/login", {
         method: "POST",
         credentials: "include",
         headers: {
@@ -24,7 +30,9 @@ const Login = () => {
       }
 
       const result = await response.json();
-      console.log(result);
+      dispatch(addUser(result));
+      navigate("/");
+      return;
     } catch (err) {
       console.error("Error: " + err);
     }
@@ -54,7 +62,7 @@ const Login = () => {
                 Password
               </label>
               <input
-                type="text"
+                type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 id="password"

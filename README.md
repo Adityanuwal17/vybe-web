@@ -24,6 +24,18 @@
 - in the api call, pass credentials:"include"
 - Then cookies and token will be set in the browser
 
+# Create the Redux Store
+
+- Install react-redux + redux toolkit
+- create store
+- wrap the provider in the app
+- create userSlice
+- create reducers in UserSlice
+- add the userSlice to the store
+
+- add loggedInUser data to the userSlice
+- update the image and show profile icon in the header only when logs in
+
 Design:
 
 Body
