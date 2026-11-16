@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addFeed } from "../utils/feedSlice";
-import UserCard from "./userCard";
+import UserCard from "./UserCard";
 
 const Feed = () => {
   const dispatch = useDispatch();
@@ -12,7 +12,9 @@ const Feed = () => {
       const res = await fetch(BASE_URL + "/feed", {
         credentials: "include",
       });
-
+      if (!res.ok) {
+        throw new Error("Failed to fetch");
+      }
       const feedData = await res.json();
       dispatch(addFeed(feedData));
     } catch (err) {

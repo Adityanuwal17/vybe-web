@@ -43,6 +43,9 @@
 - Logout feature
 - get the feed and add it in the store
 - build the userCard and show it in the feed
+- Edit profile feature is built
+- show toast on save
+- show usercard component side by side to see live changes
 
 Design:
 
