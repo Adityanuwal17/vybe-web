@@ -36,6 +36,13 @@
 - add loggedInUser data to the userSlice
 - update the image and show profile icon in the header only when logs in
 
+- redirect to feed page once logs in successfully
+
+- should not be able to access other routes without login
+- if token is not present, redirect user to login page
+- Logout
+- profile
+
 Design:
 
 Body
