@@ -52,9 +52,10 @@
 
 - Feature - Accept/Reject Connection requests
 
+- send / ignore the user card from feed
+
 Remaining:
 
-- send / ignore the user card from feed
 - sign up flow for new user
 - E2E testing
 
