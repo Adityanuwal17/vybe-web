@@ -50,6 +50,14 @@
 - New Page to see all my connection requests
 - New Page to see all the connection Requests
 
+- Feature - Accept/Reject Connection requests
+
+Remaining:
+
+- send / ignore the user card from feed
+- sign up flow for new user
+- E2E testing
+
 Design:
 
 Body
