@@ -7,10 +7,42 @@ import { BASE_URL } from "../utils/constants";
 const Login = () => {
   const [emailId, setEmailId] = useState("");
   const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [isLoginForm, setIsLoginForm] = useState(true);
   const [error, setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const handleSignUp = async () => {
+    setError("");
+    try {
+      const signUpPayload = {
+        firstName: firstName,
+        lastName: lastName,
+        emailId: emailId,
+        password: password,
+      };
+      const response = await fetch(BASE_URL + "/signup", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(signUpPayload),
+      });
+
+      const result = await response.json();
+      if (!response.ok) {
+        throw new Error("Error: " + response?.status + " - " + result?.message);
+      }
+      dispatch(addUser(result.data));
+      navigate("/profile");
+    } catch (err) {
+      console.log(err.message);
+      setError(err.message);
+    }
+  };
   const handleLogin = async () => {
     const loginPayload = {
       emailId: emailId,
@@ -31,7 +63,7 @@ const Login = () => {
       if (!response.ok) {
         throw new Error("Error: " + response?.status + " - " + result?.message);
       }
-      dispatch(addUser(result));
+      dispatch(addUser(result.data));
       navigate("/");
       return;
     } catch (err) {
@@ -43,8 +75,38 @@ const Login = () => {
     <div className="flex justify-center my-10">
       <div className="card card-border bg-base-300 w-96">
         <div className="card-body">
-          <h2 className="card-title">Login</h2>
+          <h2 className="card-title">{isLoginForm ? "Login" : "Sign Up"}</h2>
           <div>
+            {!isLoginForm && (
+              <>
+                <fieldset className="fieldset">
+                  <label className="label" htmlFor="firstName">
+                    First Name
+                  </label>
+                  <input
+                    type="text"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    id="firstName"
+                    className="input"
+                    placeholder="first Name"
+                  />
+                </fieldset>
+                <fieldset className="fieldset">
+                  <label className="label" htmlFor="lastName">
+                    Last Name
+                  </label>
+                  <input
+                    type="text"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    id="lastName"
+                    className="input"
+                    placeholder="Last name"
+                  />
+                </fieldset>
+              </>
+            )}
             <fieldset className="fieldset">
               <label className="label" htmlFor="emailId">
                 Email Id
@@ -74,10 +136,21 @@ const Login = () => {
           </div>
           <p className="text-red-500">{error}</p>
           <div className="card-actions justify-center">
-            <button className="btn btn-primary" onClick={handleLogin}>
-              Login
+            <button
+              className="btn btn-primary"
+              onClick={isLoginForm ? handleLogin : handleSignUp}
+            >
+              {isLoginForm ? "Login" : "Sign Up"}
             </button>
           </div>
+          <p
+            className="cursor-pointer m-auto py-2 hover:bg-gray-600 rounded-lg px-2"
+            onClick={() => setIsLoginForm(!isLoginForm)}
+          >
+            {isLoginForm
+              ? "New User? Sign up here!"
+              : "Existing User? Login Here!"}
+          </p>
         </div>
       </div>
     </div>

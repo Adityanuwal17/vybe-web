@@ -146,6 +146,7 @@ const EditProfile = ({ user }) => {
         <div>
           <UserCard
             user={{ firstName, lastName, photoUrl, age, gender, about }}
+            profileEdit={true}
           />
         </div>
       </div>

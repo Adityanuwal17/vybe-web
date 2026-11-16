@@ -3,12 +3,15 @@ import { BASE_URL } from "../utils/constants";
 import { useDispatch } from "react-redux";
 import { removeUserFromFeed } from "../utils/feedSlice";
 
-const UserCard = ({ user }) => {
+const UserCard = ({ user, profileEdit }) => {
   if (!user) return;
-
+  console.log(profileEdit);
   const { _id, firstName, lastName, photoUrl, age, gender, about } = user;
   const dispatch = useDispatch();
   const handleSendRequest = async (status, userId) => {
+    if (profileEdit) {
+      return;
+    }
     try {
       const response = await fetch(
         BASE_URL + "/request/send/" + status + "/" + userId,
