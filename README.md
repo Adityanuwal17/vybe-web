@@ -40,7 +40,7 @@
 
 - should not be able to access other routes without login
 - if token is not present, redirect user to login page
-- Logout
+- Logout feature
 - profile
 
 Design:

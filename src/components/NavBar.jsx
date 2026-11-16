@@ -1,10 +1,25 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { Link } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router";
+import { BASE_URL } from "../utils/constants";
+import { removeUser } from "../utils/userSlice";
 
 const NavBar = () => {
   const user = useSelector((store) => store.user);
-
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const handleLogout = async () => {
+    try {
+      const res = await fetch(BASE_URL + "/logout", {
+        method: "POST",
+        credentials: "include",
+      });
+      dispatch(removeUser());
+      navigate("/login");
+    } catch (err) {
+      // error logic, maybe redirect to error page
+    }
+  };
   return (
     <div className="navbar bg-base-300 shadow-sm">
       <div className="flex-1">
@@ -39,7 +54,7 @@ const NavBar = () => {
                 <Link>Settings</Link>
               </li>
               <li>
-                <Link>Logout</Link>
+                <a onClick={handleLogout}>Logout</a>
               </li>
             </ul>
           </div>
