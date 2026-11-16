@@ -47,6 +47,9 @@
 - show toast on save
 - show usercard component side by side to see live changes
 
+- New Page to see all my connection requests
+- New Page to see all the connection Requests
+
 Design:
 
 Body
